@@ -3,7 +3,7 @@ import LoginView from './components/Login.vue'
 import NotFoundView from './components/404.vue'
 
 // Import Views - Dash
-import DashboardView from './components/views/Dashboard.vue'
+import UsersView from './components/views/UsersView.vue'
 import TablesView from './components/views/Tables.vue'
 import TasksView from './components/views/Tasks.vue'
 import SettingView from './components/views/Setting.vue'
@@ -22,9 +22,9 @@ const routes = [
     component: DashView,
     children: [
       {
-        path: 'dashboard',
+        path: 'users',
         alias: '',
-        component: DashboardView,
+        component: UsersView,
         name: 'Foydalanuvchilar',
         meta: {description: 'Foydalanuvchilar ro\'yhati'}
       }, {

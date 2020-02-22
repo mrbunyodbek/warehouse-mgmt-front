@@ -1,10 +1,10 @@
 <template>
   <ul class="sidebar-menu">
-    <li class="header">TOOLS</li>
+    <li class="header">Ma'lumotlar bazasi</li>
     <router-link tag="li" class="pageLink" to="/">
       <a>
         <i class="fa fa-desktop"></i>
-        <span class="page">Dashboard</span>
+        <span class="page">Foydalanuvchilar</span>
       </a>
     </router-link>
     <router-link tag="li" class="pageLink" to="/tables">

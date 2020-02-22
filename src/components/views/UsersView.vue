@@ -15,7 +15,7 @@
   import UserCreateForm from '../cards/forms/UserCreateForm'
 
   export default {
-    name: 'Dashboard',
+    name: 'UsersView',
     components: {userList, UserCreateForm},
     data() {
       return {
