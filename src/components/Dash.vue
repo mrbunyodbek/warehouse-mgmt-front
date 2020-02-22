@@ -3,10 +3,10 @@
 
     <!-- Horizontal bar at top. Contains messages, notifications, tasks and user menu -->
     <dash-header :user="user"></dash-header>
-    
+
     <!-- Left side column. contains the logo and sidebar -->
     <sidebar :user="user" />
-  
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -24,10 +24,13 @@
         </ol>
       </section>
 
-      <router-view></router-view>
+      <section class="content">
+        <router-view></router-view>
+      </section>
+
     </div>
     <!-- /.content-wrapper -->
-  
+
     <!-- Horizontal bar at bottom. Contains copy right -->
     <dash-footer></dash-footer>
   </div>
