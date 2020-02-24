@@ -4,12 +4,12 @@ import NotFoundView from './components/404.vue'
 
 // Import Views - Dash
 import UsersView from './components/views/UsersView.vue'
-import TablesView from './components/views/Tables.vue'
-import TasksView from './components/views/Tasks.vue'
-import SettingView from './components/views/Setting.vue'
-import AccessView from './components/views/Access.vue'
+import ProductsView from './components/views/ProductsView.vue'
+import WarehousesView from './components/views/WarehousesView.vue'
+import VendorsView from './components/views/VendorsView.vue'
 import ServerView from './components/views/Server.vue'
 import ReposView from './components/views/Repos.vue'
+import CustomersView from './components/views/CustomersView'
 
 // Routes
 const routes = [
@@ -26,27 +26,27 @@ const routes = [
         alias: '',
         component: UsersView,
         name: 'Foydalanuvchilar',
-        meta: {description: 'Foydalanuvchilar ro\'yhati'}
+        meta: {description: 'Ilova Foydalanuvchilari ro\'yhati va ular haqida ma\'lumot'}
       }, {
-        path: 'tables',
-        component: TablesView,
-        name: 'Tables',
-        meta: {description: 'Simple and advance table in CoPilot'}
+        path: 'products',
+        component: ProductsView,
+        name: 'Mahsulotlar',
+        meta: {description: 'Mahsulotlar ro\'yhati va ularning turlari haqida ma\'lumot'}
       }, {
-        path: 'tasks',
-        component: TasksView,
-        name: 'Tasks',
-        meta: {description: 'Tasks page in the form of a timeline'}
+        path: 'customers',
+        component: CustomersView,
+        name: 'Xaridorlar',
+        meta: {description: 'Xaridorlar ro\'yhati va ular haqida ma\'lumotlar'}
       }, {
-        path: 'setting',
-        component: SettingView,
-        name: 'Settings',
-        meta: {description: 'User settings page'}
+        path: 'warehouses',
+        component: WarehousesView,
+        name: 'Omborlar',
+        meta: {description: 'Omborlar va ular ichidagi mahsulotlar haqida ma\'lumotlar'}
       }, {
-        path: 'access',
-        component: AccessView,
-        name: 'Access',
-        meta: {description: 'Example of using maps'}
+        path: 'vendors',
+        component: VendorsView,
+        name: 'Sotuvchilar',
+        meta: {description: 'Sotuvchilar ro\'yhati va ular haqida ma\'lumotlar'}
       }, {
         path: 'server',
         component: ServerView,

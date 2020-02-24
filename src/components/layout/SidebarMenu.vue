@@ -1,26 +1,38 @@
 <template>
   <ul class="sidebar-menu">
     <li class="header">Ma'lumotlar bazasi</li>
-    <router-link tag="li" class="pageLink" to="/">
+    <router-link tag="li" class="pageLink" to="/users">
       <a>
-        <i class="fa fa-desktop"></i>
+        <i class="fa fa-star-half-full"></i>
         <span class="page">Foydalanuvchilar</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/tables">
+    <router-link tag="li" class="pageLink" to="/products">
       <a>
-        <i class="fa fa-table"></i>
-        <span class="page">Tables</span>
+        <i class="fa fa-shopping-cart"></i>
+        <span class="page">Mahsulotlar</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/vendors">
+      <a>
+        <i class="fa fa-street-view"></i>
+        <span class="page">Sotuvchilar</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/customers">
+      <a>
+        <i class="fa fa-group"></i>
+        <span class="page">Xaridorlar</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/warehouses">
+      <a>
+        <i class="fa fa-building-o"></i>
+        <span class="page">Omborlar</span>
       </a>
     </router-link>
 
     <li class="header">ME</li>
-    <router-link tag="li" class="pageLink" to="/tasks">
-      <a>
-        <i class="fa fa-tasks"></i>
-        <span class="page">Tasks</span>
-      </a>
-    </router-link>
     <router-link tag="li" class="pageLink" to="/setting">
       <a>
         <i class="fa fa-cog"></i>

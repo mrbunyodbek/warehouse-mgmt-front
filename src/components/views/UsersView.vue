@@ -1,9 +1,11 @@
 <template>
   <div class="row">
-    <user-list :users="users" @createNewUser="createNewUser"></user-list>
+      <user-list :users="users" @createNewUser="createNewUser"></user-list>
 
-    <div v-for="widget in widgets">
-      <UserCreateForm v-slot="widget"></UserCreateForm>
+    <div class="col-md-9 col-lg-9 col-8">
+      <div v-for="widget in widgets">
+        <UserCreateForm v-slot="widget"></UserCreateForm>
+      </div>
     </div>
 <!--    <user-create-form></user-create-form>-->
   </div>

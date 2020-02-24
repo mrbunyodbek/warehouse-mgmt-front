@@ -1,8 +1,8 @@
 <template>
-  <div class="col-md-9">
-    <div class="box box-success">
+  <div>
+    <div class="box box-success box-solid">
       <div class="box-header with-border">
-        <h3 class="box-title">Latest Members</h3>
+        <h3 class="box-title">Yangi foydalanuvchi</h3>
 
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -17,37 +17,37 @@
 
           <div class="form-group">
             <label for="inputUserName">Username</label>
-            <input type="text" v-model="user.username" class="form-control" id="inputUserName" placeholder="Username">
+            <input type="text" v-model="username" class="form-control" id="inputUserName" placeholder="Username">
           </div>
           <div class="form-group">
             <label for="inputPassword">Password</label>
-            <input type="password" v-model="user.password" class="form-control" id="inputPassword" placeholder="Password">
+            <input type="password" v-model="password" class="form-control" id="inputPassword" placeholder="Password">
           </div>
           <div class="form-group">
-            <label for="inputFirstName">First Name</label>
-            <input type="text" v-model="user.firstName" class="form-control" id="inputFirstName" placeholder="Enter name">
+            <label for="inputFirstName">Ism</label>
+            <input type="text" v-model="firstName" class="form-control" id="inputFirstName" placeholder="Enter name">
           </div>
           <div class="form-group">
-            <label for="inputLastName">Last Name</label>
-            <input type="text" v-model="user.lastName" class="form-control" id="inputLastName" placeholder="Last name">
+            <label for="inputLastName">Familiya</label>
+            <input type="text" v-model="lastName" class="form-control" id="inputLastName" placeholder="Last name">
           </div>
           <div class="form-group">
-            <label for="phone">Phone</label>
-            <vue-mask type="text" v-model="user.phone" class="form-control" id="phone" mask="+000(00) 000-00-00" :raw="false" placeholder="+000(00) 000-00-00"></vue-mask>
+            <label for="phone">Telefon raqami</label>
+            <vue-mask type="text" v-model="phone" class="form-control" id="phone" mask="+000(00) 000-00-00" :raw="false" placeholder="+000(00) 000-00-00"></vue-mask>
           </div>
           <div class="form-group">
-            <label for="types">Type</label>
-            <select v-model="user.userType" id="types" class="form-control">
+            <label for="types">Foydalanuvchi turi</label>
+            <select v-model="userType" id="types" class="form-control">
               <option value="ADMIN">Administrator</option>
-              <option value="DIRECTOR">Director</option>
-              <option value="STOREKEEPER">Storekeeper</option>
-              <option value="CUSTOMER">Customer</option>
+              <option value="DIRECTOR">Direktor</option>
+<!--              <option value="STOREKEEPER">Storekeeper</option>-->
+              <option value="CUSTOMER">Xaridor</option>
             </select>
           </div>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          <button class="btn btn-success no-border pull-right" type="submit">Create</button>
+          <button class="btn btn-success no-border pull-right" type="submit">Saqlash</button>
         </div>
 
       </form>
@@ -64,21 +64,34 @@
       name: 'UserCreateForm',
       data() {
         return {
-          user: {
-            username: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            address: '',
-            phone: '',
-            userType: ''
-          }
+          username: '',
+          password: '',
+          firstName: '',
+          lastName: '',
+          address: '',
+          phone: '',
+          userType: ''
         }
       },
       methods: {
-        createNewUser: function () {
+        createNewUser: function (e) {
           axios.post('http://localhost:8085/users/save', {
-            user: this.data
+            user: {
+              username: this.username,
+              password: this.password,
+              firstName: this.firstName,
+              lastName: this.lastName,
+              address: this.data.address,
+              phone: this.phone,
+              userType: this.userType
+            },
+            headers: {
+              'content-type': 'application/json'
+            }
+          })
+          .then(response => {})
+          .catch(e => {
+            alert(e)
           })
         }
       },
