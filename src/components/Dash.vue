@@ -32,7 +32,7 @@
     <!-- /.content-wrapper -->
 
     <!-- Horizontal bar at bottom. Contains copy right -->
-    <dash-footer></dash-footer>
+    <dash-footer class="navbar-fixed-bottom"></dash-footer>
   </div>
 </template>
 

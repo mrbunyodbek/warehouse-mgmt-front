@@ -1,18 +1,19 @@
 <template>
-  <div class="col-md-3 cardClass">
-    <div class="box box-warning">
+  <div class="col-md-3">
+    <div class="box box-warning card-class">
       <div class="box-header with-border">
-        <h3 class="box-title">Foydalanuvchilar ro'yhati</h3>
+        <h3 class="box-title">Foydalanuvchilar</h3>
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
           </button>
         </div>
       </div>
-      <div class="box-body" style="margin: 0; padding: 0">
+      <div class="box-body table-fixed-height" style="margin: 0; padding: 0">
         <table class="table table-hover">
           <tbody>
-          <tr v-for="inform in users" :key="inform.id">
+          <tr v-for="inform in users" :key="inform.id" @click="openInfo(inform.id)">
             <td><span>{{ inform.firstName }} </span> <span> {{ inform.lastName }}</span></td>
+            <td><span v-bind:class="[inform.userTypes==='DIRECTOR' ? 'bg-light-blue' : inform.userTypes==='CUSTOMER' ? 'bg-orange' : 'bg-red']" class="badge pull-right">{{ inform.userTypes }}</span></td>
           </tr>
           </tbody>
         </table>
@@ -29,13 +30,24 @@
       name: 'UserList',
       props: ['users'],
       methods: {
-        clickedButton (event) {
+        clickedButton () {
           this.$emit('createNewUser')
+        },
+        openInfo (id) {
+          this.$emit('openInfo', id)
         }
       }
     }
 </script>
 
 <style scoped>
-
+  tbody {
+    height: 500px;
+    display: inline-block;
+    width: 100%;
+    overflow: auto;
+  }
+  td {
+    width: 100%;
+  }
 </style>

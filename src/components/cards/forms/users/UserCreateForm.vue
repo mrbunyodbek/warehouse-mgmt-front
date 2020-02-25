@@ -7,7 +7,7 @@
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
           </button>
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+          <button type="button" class="btn btn-box-tool" data-widget="remove" @click="closeWidget"><i class="fa fa-times"></i>
           </button>
         </div>
       </div>
@@ -37,7 +37,7 @@
           </div>
           <div class="form-group">
             <label for="types">Foydalanuvchi turi</label>
-            <select v-model="userType" id="types" class="form-control">
+            <select v-model="userTypes" id="types" class="form-control">
               <option value="ADMIN">Administrator</option>
               <option value="DIRECTOR">Direktor</option>
 <!--              <option value="STOREKEEPER">Storekeeper</option>-->
@@ -47,7 +47,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          <button class="btn btn-success no-border pull-right" type="submit">Saqlash</button>
+          <input type="submit" class="btn btn-success no-border pull-right" value="Saqlash" data-widget="remove">
         </div>
 
       </form>
@@ -62,6 +62,7 @@
 
     export default {
       name: 'UserCreateForm',
+      props: ['widgetId'],
       data() {
         return {
           username: '',
@@ -70,29 +71,30 @@
           lastName: '',
           address: '',
           phone: '',
-          userType: ''
+          userTypes: ''
         }
       },
       methods: {
         createNewUser: function (e) {
+          e.preventDefault()
           axios.post('http://localhost:8085/users/save', {
-            user: {
-              username: this.username,
-              password: this.password,
-              firstName: this.firstName,
-              lastName: this.lastName,
-              address: this.data.address,
-              phone: this.phone,
-              userType: this.userType
-            },
-            headers: {
-              'content-type': 'application/json'
-            }
+            username: this.username,
+            password: this.password,
+            firstName: this.firstName,
+            lastName: this.lastName,
+            address: this.address,
+            phone: this.phone,
+            userTypes: this.userTypes
           })
-          .then(response => {})
+          .then(response => {
+            this.$emit('retrieveBackUser', response.data)
+          })
           .catch(e => {
             alert(e)
           })
+        },
+        closeWidget: function () {
+          this.$emit('closeWidget', this.widgetId)
         }
       },
       components: {
