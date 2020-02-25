@@ -5,12 +5,12 @@ import 'es6-promise/auto'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import { sync } from 'vuex-router-sync'
+import {sync} from 'vuex-router-sync'
 import routes from './routes'
 import store from './store'
 
 // Import Helpers for filters
-import { domain, count, prettyDate, pluralize } from './filters'
+import {domain, count, prettyDate, pluralize} from './filters'
 
 // Import Views - Top level
 import AppView from './components/App.vue'
@@ -28,8 +28,8 @@ var router = new VueRouter({
   routes: routes,
   mode: 'history',
   linkExactActiveClass: 'active',
-  scrollBehavior: function(to, from, savedPosition) {
-    return savedPosition || { x: 0, y: 0 }
+  scrollBehavior: function (to, from, savedPosition) {
+    return savedPosition || {x: 0, y: 0}
   }
 })
 
@@ -44,7 +44,7 @@ router.beforeEach((to, from, next) => {
     window.console.log('Not authenticated')
     next({
       path: '/login',
-      query: { redirect: to.fullPath }
+      query: {redirect: to.fullPath}
     })
   } else {
     next()

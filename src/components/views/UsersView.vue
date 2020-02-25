@@ -37,7 +37,7 @@
     },
     mounted() {
       axios
-        .get('http://localhost:8085/users/get')
+        .get('http://192.168.0.20:8085/users/get')
         .then(response => (this.users = response.data))
     },
     methods: {

@@ -29,6 +29,7 @@
     "qs": "^6.9.1",
     "slimscroll": "^0.9.1",
     "vue": "^2.2.2",
+    "vue-axios": "^2.1.5",
     "vue-date-picker": "^1.0.2",
     "vue-jquery-mask": "^1.0.3",
     "vue-resource": "^1.0.3",

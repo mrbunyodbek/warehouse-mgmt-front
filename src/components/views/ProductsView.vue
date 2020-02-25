@@ -1,50 +1,57 @@
 <template>
-  <section class="content">
-    <div class="row center-block">
-      <h1 class="text-center">Tasks</h1>
-      <ul class="timeline">
-        <!-- timeline time label -->
-        <li class="time-label">
-          <span class="bg-green">{{today}}</span>
-        </li>
-        <!-- timeline item -->
-        <li v-for="line in timeline">
-          <!-- timeline icon -->
-          <i v-bind:class="'fa ' + line.icon + ' bg-' + line.color"></i>
-          <div class="timeline-item">
-            <span class="time"><i class="fa fa-clock-o"></i>&nbsp;{{line.time}}</span>
-            <h3 class="timeline-header">{{line.title}}</h3>
-            <div class="timeline-body" v-if="line.body" v-html="line.body">
-            </div>
-            <div class="timeline-footer" v-if="line.buttons">
-              <a v-for="btn in line.buttons" v-bind:class="'btn btn-' + btn.type + ' btn-xs'" v-bind:href="btn.href" v-bind:target="btn.target">{{btn.message}}</a>
-            </div>
-          </div>
-        </li>
-      <!-- END timeline item -->
-      </ul>
+  <div class="row">
+    <products-list :products="products" @createNewProduct="createNewProduct"
+                   @openInfoCard="openInfoCard"></products-list>
+<!--    <product-info-form></product-info-form>-->
+
+    <div class="col-md-9 col-lg-9 col-8">
+      <div v-for="widget in widgets">
+        <ProductCreateForm v-slot="widget"></ProductCreateForm>
+      </div>
+      <div v-for="infoWidget in infoWidgets">
+        <ProductInfoForm v-slot="infoWidget" :chosenProduct="chosenProduct"></ProductInfoForm>
+      </div>
     </div>
-  </section>
+  </div>
 </template>
+
 <script>
-  import moment from 'moment'
-  import {timeline} from '../../demo'
+  import axios from 'axios'
+  import productsList from '../cards/lists/ProductsList'
+  import ProductCreateForm from '../cards/forms/ProductCreateForm'
+  import ProductInfoForm from '../cards/forms/ProductInfoForm'
 
   export default {
-    name: 'ProductsView',
-    computed: {
-      today () {
-        return moment().format('MMM Do YY')
+    name: 'ProductsVieProductInfoFormw',
+    components: {ProductCreateForm, productsList, ProductInfoForm},
+    data() {
+      return {
+        chosenProduct: {},
+        products: [],
+        widgets: [],
+        infoWidgets: []
+      }
+    },
+    mounted() {
+      axios
+        .get('http://192.168.0.20:8085/products/get')
+        .then(response => (this.products = response.data))
+    },
+    methods: {
+      addNewProductWidget: function () {
+        this.widgets.push('<product-create-form></product-create-form>')
       },
-      timeline () {
-        return timeline
+      createNewProduct: function () {
+        this.addNewProductWidget()
+      },
+      openInfoCard: function (id) {
+        for (let i = 0; i < this.products.length; i++) {
+          if (this.products[i].id === id) {
+            this.chosenProduct = this.products[i]
+            this.infoWidgets.push('<product-info-form></product-info-form>')
+          }
+        }
       }
     }
   }
 </script>
-
-<style>
-  .timeline-footer a.btn {
-    margin-right: 10px;
-  }
-</style>
