@@ -5,10 +5,10 @@
     <div class="col-md-9 col-lg-9 col-8">
 <!--      <NotificationItem v-slot="widget" :notification="this.message"></NotificationItem>-->
       <div v-for="(widget, index) in creationWidgets">
-        <UserCreateForm @retrieveBackUser="retrieveBackUser" :widgetId="index"></UserCreateForm>
+        <UserCreateForm @retrieveBackUser="getCreatedUserBack" :widgetId="index"></UserCreateForm>
       </div>
-      <div v-for="widget in infoWidgets">
-        <UserInfoCard :chosenUser="chosenUser"></UserInfoCard>
+      <div v-for="(widget, index) in infoWidgets">
+        <UserInfoCard :chosenUser="chosenUsers[index]"></UserInfoCard>
       </div>
     </div>
 <!--    <user-create-form></user-create-form>-->
@@ -17,17 +17,17 @@
 
 <script>
   import axios from 'axios'
-  import userList from '../cards/lists/UserList'
+  import UserList from '../cards/lists/UserList'
   import UserCreateForm from '../cards/forms/users/UserCreateForm'
   import NotificationItem from '../layout/NotificationItem'
   import UserInfoCard from '../cards/forms/users/UserInfoCard'
 
   export default {
     name: 'UsersView',
-    components: {UserInfoCard, NotificationItem, userList, UserCreateForm},
+    components: {UserInfoCard, NotificationItem, UserList, UserCreateForm},
     data() {
       return {
-        chosenUser: {},
+        chosenUsers: [],
         users: [],
         creationWidgets: [],
         infoWidgets: [],
@@ -37,25 +37,34 @@
     },
     mounted() {
       axios
-        .get('http://192.168.0.20:8085/users/get')
+        .get('http://localhost:8085/users/get')
         .then(response => (this.users = response.data))
     },
     methods: {
-      addNewUserWidget: function () {
+      /**
+       * Method adds UserCreateForm component into creationWidgets array.
+       * After that component will be appeared on the screen.
+       */
+      createNewUser: function () {
         this.creationWidgets.push('<user-create-form></user-create-form>')
       },
-      createNewUser: function () {
-        this.addNewUserWidget()
-      },
-      retrieveBackUser: function (response) {
+      /**
+       * This method gets created user from UserCreateForm component.
+       * @param response Created user object.
+       */
+      getCreatedUserBack: function (response) {
         this.message = response.message
         this.users.push(response.user)
       },
+      /**
+       * Method calls UserInfoCard component for chosen user.
+       * @param id Chosen user id in UserList component.
+       */
       openInfoCard: function (id) {
         console.log(id)
         for (let i = 0; i < this.users.length; i++) {
           if (this.users[i].id === id) {
-            this.chosenUser = this.users[i]
+            this.chosenUsers.push(this.users[i])
             this.infoWidgets.push('<user-info-card></user-info-card>')
           }
         }

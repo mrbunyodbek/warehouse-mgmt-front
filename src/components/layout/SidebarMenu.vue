@@ -1,6 +1,31 @@
 <template>
   <ul class="sidebar-menu">
-    <li class="header">Ma'lumotlar bazasi</li>
+    <li class="header">ASOSIY IMKONIYATLAR</li>
+    <li>
+      <a data-toggle="modal" data-target="#modal-payment">
+        <i class="fa fa-money"></i>
+        <span class="page">To'lov qabul qilish</span>
+      </a>
+    </li>
+    <li>
+      <a data-toggle="modal" data-target="#modal-order">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="page">Mahsulot buyurtma qilish</span>
+      </a>
+    </li>
+    <li>
+      <a data-toggle="modal" data-target="#modal-income">
+        <i class="fa fa-arrow-down"></i>
+        <span class="page">Omborga tovar sotib olish</span>
+      </a>
+    </li>
+    <li>
+      <a data-toggle="modal" data-target="#modal-outgo">
+        <i class="fa fa-arrow-up"></i>
+        <span>Xaridorga mahsulot yetkazish</span>
+      </a>
+    </li>
+    <li class="header text-uppercase">Ma'lumotlar bazasi</li>
     <router-link tag="li" class="pageLink" to="/users">
       <a>
         <i class="fa fa-star-half-full"></i>
@@ -39,67 +64,6 @@
         <span class="page">Settings</span>
       </a>
     </router-link>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-folder-o"></i>
-        <span class="treeview-title">Files</span>
-        <span class="pull-right-container pull-right">
-          <i class="fa fa-angle-left fa-fw"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li>
-          <a href="#">
-            <i class="fa fa-file-word-o"></i> Item 1
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-file-picture-o"></i> Item 2
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-file-pdf-o"></i> Item 3
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    <li class="header">LOGS</li>
-    <router-link tag="li" class="pageLink" to="/access">
-      <a>
-        <i class="fa fa-book"></i>
-        <span class="page">Access</span>
-      </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/server">
-      <a>
-        <i class="fa fa-hdd-o"></i>
-        <span class="page">Server</span>
-      </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/repos">
-      <a>
-        <i class="fa fa-heart"></i>
-        <span class="page">Repos</span>
-        <small class="label pull-right bg-green">AJAX</small>
-      </a>
-    </router-link>
-
-    <li class="header">PAGES</li>
-    <router-link tag="li" class="pageLink" to="/login">
-      <a>
-        <i class="fa fa-circle-o text-yellow"></i>
-        <span class="page"> Login</span>
-      </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/404">
-      <a>
-        <i class="fa fa-circle-o text-red"></i>
-        <span class="page"> 404</span>
-      </a>
-    </router-link>
   </ul>
 </template>
 <script>
@@ -108,6 +72,9 @@ export default {
 }
 </script>
 <style>
+li {
+  cursor: pointer;
+}
 /* override default */
 .sidebar-menu > li > a {
   padding: 12px 15px 12px 15px;

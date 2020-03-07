@@ -25,11 +25,15 @@
           </div>
           <div class="form-group">
             <label for="inputFirstName">Ism</label>
-            <input type="text" v-model="firstName" class="form-control" id="inputFirstName" placeholder="Enter name">
+            <input type="text" v-model="firstName" class="form-control" id="inputFirstName" placeholder="Foydalanuvchi ismi">
           </div>
           <div class="form-group">
             <label for="inputLastName">Familiya</label>
-            <input type="text" v-model="lastName" class="form-control" id="inputLastName" placeholder="Last name">
+            <input type="text" v-model="lastName" class="form-control" id="inputLastName" placeholder="Familiya">
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Manzil</label>
+            <input type="text" v-model="lastName" class="form-control" id="inputAddress" placeholder="Foydalanuvchi yashash manzili">
           </div>
           <div class="form-group">
             <label for="phone">Telefon raqami</label>
@@ -37,7 +41,7 @@
           </div>
           <div class="form-group">
             <label for="types">Foydalanuvchi turi</label>
-            <select v-model="userTypes" id="types" class="form-control">
+            <select v-model="userType" id="types" class="form-control">
               <option value="ADMIN">Administrator</option>
               <option value="DIRECTOR">Direktor</option>
 <!--              <option value="STOREKEEPER">Storekeeper</option>-->
@@ -71,7 +75,7 @@
           lastName: '',
           address: '',
           phone: '',
-          userTypes: ''
+          userType: ''
         }
       },
       methods: {
@@ -84,7 +88,7 @@
             lastName: this.lastName,
             address: this.address,
             phone: this.phone,
-            userTypes: this.userTypes
+            userType: this.userType
           })
           .then(response => {
             this.$emit('retrieveBackUser', response.data)

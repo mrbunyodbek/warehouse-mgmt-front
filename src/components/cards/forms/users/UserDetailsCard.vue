@@ -4,7 +4,8 @@
 
 <script>
   export default {
-    name: 'UserDetailsCard'
+    name: 'UserDetailsCard',
+    props: ['chosenUser']
   }
 </script>
 

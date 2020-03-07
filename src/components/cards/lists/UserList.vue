@@ -13,7 +13,7 @@
           <tbody>
           <tr v-for="inform in users" :key="inform.id" @click="openInfo(inform.id)">
             <td><span>{{ inform.firstName }} </span> <span> {{ inform.lastName }}</span></td>
-            <td><span v-bind:class="[inform.userTypes==='DIRECTOR' ? 'bg-light-blue' : inform.userTypes==='CUSTOMER' ? 'bg-orange' : 'bg-red']" class="badge pull-right">{{ inform.userTypes }}</span></td>
+            <td><span v-bind:class="[inform.userType==='DIRECTOR' ? 'bg-light-blue' : inform.userType==='CUSTOMER' ? 'bg-orange' : 'bg-red']" class="badge pull-right">{{ inform.userType }}</span></td>
           </tr>
           </tbody>
         </table>

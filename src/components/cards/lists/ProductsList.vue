@@ -39,7 +39,7 @@
     },
     mounted() {
       axios
-        .get('http://192.168.0.20:8085/products/get')
+        .get('http://localhost:8085/products/get')
         .then(response => (this.products = response.data))
     },
     methods: {

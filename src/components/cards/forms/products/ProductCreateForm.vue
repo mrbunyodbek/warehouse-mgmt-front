@@ -24,7 +24,7 @@
           </div>
           <div class="form-group">
             <label for="inputMeasurement">O`lchov turi</label>
-            <input type="text" v-model="meansurement" class="form-control" id="inputMeasurement"
+            <input type="text" v-model="measurement" class="form-control" id="inputMeasurement"
                    placeholder="O`lchov turini kiriting">
           </div>
         </div>
@@ -45,17 +45,17 @@
       return {
         name: '',
         description: '',
-        meansurement: ''
+        measurement: ''
       }
     },
     methods: {
       createNewProduct: function (e) {
         e.preventDefault()
-        axios.post('http://192.168.0.20:8085/users/save', {
-          user: {
+        axios.post('http://localhost:8085/products/save', {
+          product: {
             name: this.name,
             description: this.description,
-            meansurement: this.meansurement
+            measurement: this.measurement
           },
           headers: {
             'content-type': 'application/json'

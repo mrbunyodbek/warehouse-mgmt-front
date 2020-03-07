@@ -31,6 +31,11 @@
     </div>
     <!-- /.content-wrapper -->
 
+    <!-- Modals -->
+    <order-form></order-form>
+    <payment-form></payment-form>
+    <income-form></income-form>
+    <outgo-form></outgo-form>
     <!-- Horizontal bar at bottom. Contains copy right -->
     <dash-footer class="navbar-fixed-bottom"></dash-footer>
   </div>
@@ -42,6 +47,10 @@ import config from '../config'
 import DashFooter from './layout/DashFooter'
 import DashHeader from './layout/DashHeader'
 import Sidebar from './layout/Sidebar'
+import OrderForm from './cards/forms/documents/OrderForm'
+import PaymentForm from './cards/forms/documents/PaymentForm'
+import IncomeForm from './cards/forms/documents/IncomeForm'
+import OutgoForm from './cards/forms/documents/OutgoForm'
 import 'hideseek'
 
 export default {
@@ -49,7 +58,11 @@ export default {
   components: {
     DashFooter,
     DashHeader,
-    Sidebar
+    Sidebar,
+    OrderForm,
+    PaymentForm,
+    IncomeForm,
+    OutgoForm
   },
   data: function () {
     return {
@@ -68,6 +81,8 @@ export default {
         roles: [faker.name.jobTitle(), faker.name.jobTitle()]
       }
     }
+  },
+  methods: {
   }
 }
 </script>

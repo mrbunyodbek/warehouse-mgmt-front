@@ -18,8 +18,8 @@
 <script>
   import axios from 'axios'
   import productsList from '../cards/lists/ProductsList'
-  import ProductCreateForm from '../cards/forms/ProductCreateForm'
-  import ProductInfoForm from '../cards/forms/ProductInfoForm'
+  import ProductCreateForm from '../cards/forms/products/ProductCreateForm'
+  import ProductInfoForm from '../cards/forms/products/ProductInfoForm'
 
   export default {
     name: 'ProductsVieProductInfoFormw',
@@ -34,7 +34,7 @@
     },
     mounted() {
       axios
-        .get('http://192.168.0.20:8085/products/get')
+        .get('http://localhost:8085/products/get')
         .then(response => (this.products = response.data))
     },
     methods: {
