@@ -12,7 +12,7 @@
         <table class="table table-hover">
           <tbody>
           <tr v-for="inform in products" :key="inform.id" @click="toInfo(inform.id)">
-            <td :id="inform.description"><span>{{ inform.name }} </span> <span> {{ inform.meansurement }}</span></td>
+            <td :id="inform.description"><span>{{ inform.name }} </span> <span> {{ inform.measurement }}</span></td>
             <td></td>
           </tr>
           </tbody>

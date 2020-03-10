@@ -10,7 +10,7 @@
           </button>
         </div>
       </div>
-      <form @submit="createNewProduct" class="no-padding">
+      <form class="no-padding">
         <div class="box-body">
           <div class="form-group">
             <label for="inputName">Mahsulot nomi</label>
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="box-footer">
-          <button class="btn btn-success no-border pull-right" type="submit" data-widget="remove" title="Kiritilgan ma'">Saqlash</button>
+          <button @click="createNewProduct" class="btn btn-success no-border pull-right" data-widget="remove" title="Kiritilgan ma'hsulotni saqlash">Saqlash</button>
         </div>
       </form>
     </div>
