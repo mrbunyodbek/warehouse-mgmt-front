@@ -12,7 +12,7 @@
             <div class="col-md-6 col-xs-12">
               <div class="form-group">
                 <label for="orderDate">Buyurtma qilingan sana</label>
-                <date-picker class="my-datepicker" id="orderDate"></date-picker>
+                <input type="date" class="form-control" v-model="orderDate" id="orderDate">
               </div>
             </div>
             <div class="col-md-6 col-xs-12">
@@ -53,11 +53,11 @@
           </div>
           <hr>
           <h4>Mahsulotlar ro'yhati</h4>
-          <item-list></item-list>
+          <item-list @newItemAdded="updateItemsObject"></item-list>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Bekor qilish</button>
-          <button type="button" class="btn btn-primary">Saqlash</button>
+          <button type="button" class="btn btn-primary" @click="createOrder">Saqlash</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -68,7 +68,7 @@
 
 <script>
   import axios from 'axios'
-  import ItemList from './OrderItemList'
+  import ItemList from './item-lists/OrderItemList'
   import DatePicker from 'vue-date-picker'
   import CustomerSelect from 'vue-select'
 
@@ -81,10 +81,10 @@
         selectedUser: {},
         documentType: 'ORDER',
         orderDate: '',
-        status: false,
         balance: 0,
         customerId: '',
-        documentNo: 'ORDER' + new Date('YYYY-MM-DD/HH:mm')
+        documentNo: '',
+        items: []
       }
     },
     mounted() {
@@ -98,16 +98,26 @@
         '/' + currentDate.getHours() + currentDate.getMinutes()
     },
     methods: {
-
+      updateItemsObject: function (items) {
+        this.items = items
+        console.log(this.orderDate)
+      },
+      createOrder: function (e) {
+        e.preventDefault()
+        axios.post('http://localhost:8085/orders/save', {
+          order: {
+            documentType: 'ORDER',
+            documentNo: this.documentNo,
+            customerId: this.selectedUser.id,
+            orderDate: this.orderDate
+          },
+          items: this.items
+        })
+        window.location.reload()
+      }
     }
   }
 </script>
 
 <style scoped>
-  .my-datepicker {
-    display: block !important;
-  }
-  .my-datepicker input {
-    height: 3rem;
-  }
 </style>

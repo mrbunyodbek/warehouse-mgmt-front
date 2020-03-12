@@ -9,6 +9,7 @@
         </div>
         <div class="modal-body">
           <p>One fine body…</p>
+          <income-item-list></income-item-list>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Bekor qilish</button>
@@ -22,11 +23,15 @@
 </template>
 
 <script>
+  import IncomeItemList from './item-lists/IncomeItemList'
   export default {
-    name: 'IncomeForm'
+    name: 'IncomeForm',
+    components: {IncomeItemList}
   }
 </script>
 
 <style scoped>
-
+  .modal-dialog {
+    min-width: 100rem;
+  }
 </style>
