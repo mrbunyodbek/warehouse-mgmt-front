@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="col-lg-12 ">
     <div class="box box-success box-solid">
       <div class="box-header with-border">
         <h3 class="box-title">Yangi mahsulot</h3>
@@ -19,7 +19,7 @@
           </div>
           <div class="form-group">
             <label for="inputDescription">Mahsulot tavsifi</label>
-            <textarea type="password" v-model="description" class="form-control" rows="4" id="inputDescription"
+            <textarea type="text" v-model="description" class="form-control" rows="4" id="inputDescription"
                       placeholder="Mahsulot haqida qisqacha ma'lumot bering"></textarea>
           </div>
           <div class="form-group">
@@ -29,7 +29,9 @@
           </div>
         </div>
         <div class="box-footer">
-          <button @click="createNewProduct" class="btn btn-success no-border pull-right" data-widget="remove" title="Kiritilgan ma'hsulotni saqlash">Saqlash</button>
+          <button @click="createNewProduct" class="btn btn-success no-border pull-right" data-widget="remove"
+                  title="Kiritilgan ma'hsulotni saqlash">Saqlash
+          </button>
         </div>
       </form>
     </div>
@@ -51,16 +53,16 @@
     methods: {
       createNewProduct: function (e) {
         e.preventDefault()
-        axios.post('http://localhost:8085/products/save', {
-          product: {
-            name: this.name,
-            description: this.description,
-            measurement: this.measurement
-          },
-          headers: {
-            'content-type': 'application/json'
-          }
-        })
+        let newProduct = {
+          name: this.name,
+          description: this.description,
+          measurement: this.measurement
+        }
+        axios.post('http://localhost:8085/products/save', newProduct)
+          .then(response => {
+            console.log(response.data)
+            this.$emit('createdProduct', response.data)
+          })
           .catch(e => {
             alert(e)
           }

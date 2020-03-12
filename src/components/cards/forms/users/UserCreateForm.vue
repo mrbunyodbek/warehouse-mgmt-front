@@ -12,7 +12,7 @@
         </div>
       </div>
       <!-- /.box-header -->
-      <form @submit="createNewUser" class="no-padding">
+      <form class="no-padding">
         <div class="box-body">
 
           <div class="form-group">
@@ -51,9 +51,8 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          <input type="submit" class="btn btn-success no-border pull-right" value="Saqlash" data-widget="remove">
+          <button @click="createNewUser" class="btn btn-success no-border pull-right" data-widget="remove">Saqlash</button>
         </div>
-
       </form>
       <!-- /.box-footer -->
     </div>
