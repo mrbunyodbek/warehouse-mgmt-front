@@ -2,14 +2,12 @@
   <div class="row">
     <products-list :products="products" @createNewProduct="createNewProduct"
                    @openInfoCard="openInfoCard"></products-list>
-<!--    <product-info-form></product-info-form>-->
-
-    <div class="col-md-9 col-lg-9 col-8">
+    <div class="col-md-8 col-lg-8 col-8">
       <div v-for="widget in widgets">
-        <ProductCreateForm v-slot="widget"></ProductCreateForm>
+        <ProductCreateForm @createdProduct="createdProduct" v-slot="widget"></ProductCreateForm>
       </div>
-      <div v-for="infoWidget in infoWidgets">
-        <ProductInfoForm v-slot="infoWidget" :chosenProduct="chosenProduct"></ProductInfoForm>
+      <div v-for="(infoWidget,index) in infoWidgets">
+        <ProductInfoForm :chosenProduct="chosenProduct[index]"></ProductInfoForm>
       </div>
     </div>
   </div>
@@ -22,11 +20,11 @@
   import ProductInfoForm from '../cards/forms/products/ProductInfoForm'
 
   export default {
-    name: 'ProductsVieProductInfoFormw',
+    name: 'ProductsVieProductInfoForm',
     components: {ProductCreateForm, productsList, ProductInfoForm},
     data() {
       return {
-        chosenProduct: {},
+        chosenProduct: [],
         products: [],
         widgets: [],
         infoWidgets: []
@@ -38,6 +36,10 @@
         .then(response => (this.products = response.data))
     },
     methods: {
+      createdProduct: function (newProduct) {
+        this.products.push(newProduct.object)
+        console.log(newProduct.object)
+      },
       addNewProductWidget: function () {
         this.widgets.push('<product-create-form></product-create-form>')
       },
@@ -47,7 +49,7 @@
       openInfoCard: function (id) {
         for (let i = 0; i < this.products.length; i++) {
           if (this.products[i].id === id) {
-            this.chosenProduct = this.products[i]
+            this.chosenProduct.push(this.products[i])
             this.infoWidgets.push('<product-info-form></product-info-form>')
           }
         }

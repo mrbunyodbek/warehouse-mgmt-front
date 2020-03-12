@@ -1,8 +1,8 @@
 <template>
-
+  <div class="col-lg-12">
     <div class="box box-success box-solid">
       <div class="box-header with-border">
-        <h3 class="box-title">Mahsulot haqida ma`lumotlar</h3>
+        <h3 class="box-title">Mahsulot haqida ma'lumotlar</h3>
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
           </button>
@@ -10,17 +10,22 @@
           </button>
         </div>
       </div>
-        <div class="box-body"></div>
-        <div class="box-footer"></div>
+      <div class="box-body">
+        <h3>{{ chosenProduct.name }}</h3>
+        <span class="text-gray">Description: {{ chosenProduct.description }}</span><br>
+        <span class="text-gray">Measurement: {{ chosenProduct.measurement }}</span>
+        <hr>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
   // import axios from 'axios'
 
   export default {
-    name: 'ProductInfoForm'
-    // props: ['chosenProduct']
+    name: 'ProductInfoForm',
+    props: ['chosenProduct']
     // ,
     // mounted() {
     //   axios
