@@ -2,7 +2,7 @@
   <div class="row">
       <user-list :users="users" @createNewUser="createNewUser" @openInfo="openInfoCard"></user-list>
 
-    <div class="col-md-9 col-lg-9 col-8">
+    <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 col-8">
 <!--      <NotificationItem v-slot="widget" :notification="this.message"></NotificationItem>-->
       <div v-for="(widget, index) in creationWidgets">
         <UserCreateForm @retrieveBackUser="getCreatedUserBack" :widgetId="index"></UserCreateForm>

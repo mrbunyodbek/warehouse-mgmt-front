@@ -4,9 +4,9 @@
     <ProductSelect
       @input="addNewRow"
       id="selection"
-      :options="items"
+      :options="products"
       label="name"
-      v-model="selectedItem">
+      v-model="selectedProduct">
       <template slot="option" slot-scope="option">
         <table class="no-border" style="width: 100%;">
           <tr>
@@ -16,23 +16,6 @@
               <span v-if="option.description.length < 50">{{ option.description }}</span>
             </td>
           </tr>
-          <tr>
-            <td>
-            </td>
-            <td class="option-info__stats">
-              <div class="row">
-                <div class="col-md-3">
-                  <span>Ombordagi soni: </span>
-                  <span v-if="option.warehouses.length > 0"><b>{{ option.overallQuantity }}</b></span>
-                  <span v-if="option.warehouses.length === 0">0</span>
-                </div>
-                <div class="col-md-9">
-                  <span>Narxi: </span>
-                  <span><b>{{ option.price }}</b></span>
-                </div>
-              </div>
-            </td>
-          </tr>
         </table>
       </template>
     </ProductSelect>
@@ -40,28 +23,48 @@
     <table class="table table-bordered table-hover">
       <thead>
       <tr>
-        <th class="centralize-text" style="width: 30%;" rowspan="2">Mahsulot</th>
-        <th class="centralize-text" rowspan="2">Ombor</th>
-        <th class="centralize-text" rowspan="2">Soni</th>
-        <th class="centralize-text" style="width: 10%;">Narx</th>
-        <th class="centralize-text" style="width: 10%;">Qiymat</th>
+        <th class="centralize-text" style="width: 30%;">Mahsulot</th>
+        <th class="centralize-text" style="width: 30%;">Ombor</th>
+        <th class="centralize-text" style="width: 10%;">Miqdori</th>
+        <th class="centralize-text" style="width: 10%;">Narxi</th>
+        <th class="centralize-text" style="width: 15%;">Qiymat</th>
         <th class="centralize-text" style="width: 5%;"></th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="(prod, index) in this.registered">
-        <td class="centralize-text">{{ prod.name }}, (Omborda: {{ prod.overallQuantity }})</td>
-        <td>{{ prod.description }}</td>
-        <td class="centralize-text">{{ prod.price }}</td>
+        <td><b>{{ prod.name }}</b>, <small>({{ prod.description }})</small></td>
+        <td class="centralize-text">
+          <ProductSelect
+            :options="warehouses"
+            label="name">
+            <template slot="option" slot-scope="option">
+              <div>
+                <b>{{ option.name }}</b>,
+                <span v-if="option.address.length > 50"><small>{{ option.address.substring(0, 70) }}...</small></span>
+                <span v-if="option.address.length < 50"><small>{{ option.address }}</small></span>
+              </div>
+            </template>
+          </ProductSelect>
+        </td>
         <td class="centralize-text">
           <label>
             <input
               type="number"
               class="form-control"
-              :max="prod.overallQuantity"
+              v-model="prod.price"
+              placeholder="0"
+            >
+          </label>
+        </td>
+        <td class="centralize-text">
+          <label>
+            <input
+              type="number"
+              class="form-control"
               v-model="prod.quantity"
               placeholder="0"
-              @change="checkQuantity(prod.quantity, prod.overallQuantity)"
+              @mouseleave="resendData"
             >
           </label>
         </td>
@@ -71,17 +74,18 @@
               type="number"
               class="form-control"
               disabled
+              placeholder="0"
               v-model="prod.total = prod.quantity * prod.price">
           </label>
         </td>
         <td class="text-center centralize-text">
           <button class="btn btn-sm btn-danger"
-                  :title="prod.name + 'ni ro\'yhatdan o\'chirish'">
-            <i class="fa fa-minus" @click="deleteItemByIndex(index)"></i>
+             :title="prod.name + 'ni ro\'yhatdan o\'chirish'"
+             @click="deleteItemByIndex(index)">
+            <i class="fa fa-minus"></i>
           </button>
         </td>
       </tr>
-
       </tbody>
     </table>
   </div>
@@ -97,65 +101,89 @@
     components: {ProductSelect},
     data() {
       return {
+        products: [],
+        warehouses: [],
+        selectedWarehouse: {
+          id: 0,
+          name: '',
+          address: ''
+        },
+        selectedProduct: {
+          id: 0,
+          name: '',
+          description: '',
+          measurement: '',
+          price: 0
+        },
         selectedItem: {
           productId: 0,
+          warehouseId: 0,
           name: '',
           description: '',
           measurement: '',
           cost: 0,
           price: 0,
           quantity: 0,
-          total: 0,
-          overallQuantity: 0
+          total: 0
         },
         items: [],
-        total: 0,
         registered: []
       }
     },
     mounted() {
-      axios.get('http://localhost:8085/collector/product-counts')
+      axios.get('http://localhost:8085/collector/products-n-warehouses')
         .then(response => {
-          this.items = response.data
+          this.products = response.data.products
+          this.warehouses = response.data.warehouses
         })
     },
     methods: {
+      /**
+       * Adding new row to the table with chosen product
+       */
       addNewRow: function () {
-        if (this.selectedItem.overallQuantity > 0) {
-          this.registered.push(this.selectedItem)
-          this.items.splice(this.getNthElementIndexFromArray(this.selectedItem.id), 1)
-          this.selectedItem = {
-            productId: 0,
-            name: '',
-            description: '',
-            measurement: '',
-            price: 0,
-            quantity: 0,
-            total: 0,
-            overallQuantity: 0
-          }
-        } else {
-          alert('\'' + this.selectedItem.name + '\'ni ro\'yhatga qo\'shib bo\'lmaydi. ' +
-            'Omborda bu mahsulot hozirda yo\'q. Iltimos, boshqa mahsulotni tanlang!')
+        this.registered.push(this.selectedProduct)
+        this.products.splice(this.getNthElementIndexFromArray(this.selectedProduct.id), 1)
+        this.selectedProduct = {
+          id: 0,
+          name: '',
+          description: '',
+          measurement: '',
+          price: 0
         }
       },
+      /**
+       * Delete product from table by its index
+       * @param index Chosen product index
+       */
       deleteItemByIndex: function (index) {
-        this.items.push(this.registered[index])
+        this.products.push(this.registered[index])
         this.registered.splice(index, 1)
       },
-      checkQuantity: function (insertedQty, qty) {
-        if (insertedQty > qty) {
-          alert('Kiritilgan miqdor ombordagi umumiy miqdordan katta bo\'lmasligi kerak. ' +
-            'Umumiy miqdor ' + qty + 'ga teng.')
-          this.selectedItem.quantity = this.selectedItem.overallQuantity
-        } else {
-          this.$emit('newItemAdded', this.registered)
-        }
+      /**
+       * Adding warehouse id to product.
+       * @param item Chosen warehouse.
+       * @param index Index of the product for which warehouse has benn assigned.
+       */
+      getWarehouse: function (item, index) {
+        this.registered[index].warehouseId = item.id
+        console.log(this.registered)
       },
+      /**
+       * Method will be called every time when mouse leave Quantity input field.
+       */
+      resendData: function () {
+        this.$emit('sendData', this.registered)
+      },
+      /**
+       * Gets index of the object in Products array for further uasge
+       * @param id Chosen product id.
+       * @returns {number} Array index of the product
+       */
       getNthElementIndexFromArray: function (id) {
         let index = 0
-        for (let i = 0; i < this.items.length; i++) {
-          if (this.items[i].id === id) {
+        for (let i = 0; i < this.products.length; i++) {
+          if (this.products[i].id === id) {
             index = i
           }
         }

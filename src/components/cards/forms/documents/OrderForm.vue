@@ -94,7 +94,7 @@
       })
       let currentDate = new Date()
       this.documentNo = 'ORDER' +
-        currentDate.getFullYear() + currentDate.getMonth() + currentDate.getDay() +
+        currentDate.getFullYear() + currentDate.getMonth() + currentDate.getDate() +
         '/' + currentDate.getHours() + currentDate.getMinutes()
     },
     methods: {

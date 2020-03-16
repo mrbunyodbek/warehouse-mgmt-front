@@ -75,9 +75,9 @@
           </label>
         </td>
         <td class="text-center centralize-text">
-          <button class="btn btn-sm btn-danger"
+          <button class="btn btn-sm btn-danger" @click="deleteItemByIndex(index)"
                   :title="prod.name + 'ni ro\'yhatdan o\'chirish'">
-            <i class="fa fa-minus" @click="deleteItemByIndex(index)"></i>
+            <i class="fa fa-minus"></i>
           </button>
         </td>
       </tr>
