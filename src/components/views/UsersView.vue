@@ -68,10 +68,6 @@
             this.infoWidgets.push('<user-info-card></user-info-card>')
           }
         }
-      },
-      closeWidget: function (widgetId) {
-        console.log('Closing widget id: ' + widgetId)
-        this.creationWidgets.splice(widgetId, 1)
       }
     }
   }

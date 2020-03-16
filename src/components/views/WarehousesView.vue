@@ -2,9 +2,15 @@
   <div class="row">
       <WarehousesList :warehouses="warehouses" @createNewWarehouse="createNewWarehouse"
                       @openInfoCard="openInfoCard"></WarehousesList>
-    <div class="col-8" v-for="widget in widgets">
-      <WarehouseCreateForm @createdWarehouse="createdWarehouse" v-slot="widget"></WarehouseCreateForm>
+    <div class="col-md-8 col-lg-8 col-8">
+      <div class="col-8" v-for="widget in widgets">
+        <WarehouseCreateForm @createdWarehouse="createdWarehouse" v-slot="widget"></WarehouseCreateForm>
+      </div>
+      <div v-for="(widget, index) in infoWidgets">
+        <WarehouseInfoForm :chosenWarehouse="chosenWarehouse[index]"></WarehouseInfoForm>
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -25,7 +31,8 @@
           address: ''
         },
         widgets: [],
-        chosenWarehouse: []
+        chosenWarehouse: [],
+        infoWidgets: []
       }
     },
     mounted() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-8 ">
+  <div class="col-lg-12">
     <div class="box box-success box-solid">
       <div class="box-header with-border">
         <h3 class="box-title">Yangi ombor</h3>
@@ -20,7 +20,7 @@
           <div class="form-group">
             <label for="inputAddress">Ombor manzili</label>
             <input type="text" v-model="address" class="form-control" id="inputAddress"
-                   placeholder="Mahsulot haqida qisqacha ma'lumot bering"/>
+                   placeholder="Ombor manzilini kiriting"/>
           </div>
         </div>
         <div class="box-footer">

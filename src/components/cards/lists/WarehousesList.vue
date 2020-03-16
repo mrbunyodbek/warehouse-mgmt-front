@@ -8,8 +8,8 @@
           </button>
         </div>
       </div>
-      <div class="box-body" style="margin: 0; padding: 0">
-        <table class="table table-hover">
+      <div class="box-body no-margin" style="padding: 0">
+        <table class="table table-hover" style="margin:0; padding: 0">
           <tbody>
           <tr v-for="warehouse in warehouses" :key="warehouse.id" @click="toInfo(warehouse.id)">
             <!--              @click="toWarehouseInfo(warehouse.id)"-->

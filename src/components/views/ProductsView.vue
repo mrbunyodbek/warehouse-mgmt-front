@@ -1,10 +1,12 @@
 <template>
   <div class="row">
-    <products-list :products="products" @createNewProduct="createNewProduct"
+    <products-list :products="products"
+                   @createNewProduct="createNewProduct"
                    @openInfoCard="openInfoCard"></products-list>
     <div class="col-md-8 col-lg-8 col-8">
       <div v-for="widget in widgets">
-        <ProductCreateForm @createdProduct="createdProduct" v-slot="widget"></ProductCreateForm>
+        <ProductCreateForm @createdProduct="createdProduct"
+                           v-slot="widget"></ProductCreateForm>
       </div>
       <div v-for="(infoWidget,index) in infoWidgets">
         <ProductInfoForm :chosenProduct="chosenProduct[index]"></ProductInfoForm>
