@@ -1919,10 +1919,17 @@ datatables.net-bs@^1.10.19:
     datatables.net "1.10.20"
     jquery ">=1.7"
 
-datatables.net@1.10.20, datatables.net@^1.10.19:
+datatables.net@1.10.20:
   version "1.10.20"
   resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.10.20.tgz#9d65ecc3c83cbe7baa4fa5a053405c8fe42c1350"
   integrity sha512-4E4S7tTU607N3h0fZPkGmAtr9mwy462u+VJ6gxYZ8MxcRIjZqHy3Dv1GNry7i3zQCktTdWbULVKBbkAJkuHEnQ==
+  dependencies:
+    jquery ">=1.7"
+
+datatables.net@^1.11.3:
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.11.3.tgz#80e691036efcd62467558ee64c07dd566cb761b4"
+  integrity sha512-VMj5qEaTebpNurySkM6jy6sGpl+s6onPK8xJhYr296R/vUBnz1+id16NVqNf9z5aR076OGcpGHCuiTuy4E05oQ==
   dependencies:
     jquery ">=1.7"
 
@@ -6807,6 +6814,11 @@ void-elements@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
+vue-axios@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/vue-axios/-/vue-axios-2.1.5.tgz#1af4bf1218ed71309c76afb38d0f683e312c24a7"
+  integrity sha512-th5xVbInVoyIoe+qY+9GCflEVezxAvztD4xpFF39SRQYqpoKD2qkmX8yv08jJG9a2SgNOCjirjJGSwg/wTrbmA==
+
 vue-date-picker@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/vue-date-picker/-/vue-date-picker-1.0.2.tgz#d8243dde3d3c37b550cbe4f88c8d4b0803128471"
@@ -6848,6 +6860,11 @@ vue-resource@^1.0.3:
 vue-router@^2.2.0:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.5.3.tgz#073783f564b6aece6c8a59c63e298dc2aabfb51b"
+
+vue-select@^3.6.0:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-3.13.0.tgz#78d519984139156adcbf56af260fb6c2a69093a6"
+  integrity sha512-+PcWtfA1i3WVtkVwBPQknnOZL6QWSD2XiAVbSn0xAQvjOrmGAg7z+o9HkezXhtGdEstloJOdM8SujrUVyphKqg==
 
 vue-style-loader@^2.0.0, vue-style-loader@^2.0.4:
   version "2.0.5"
